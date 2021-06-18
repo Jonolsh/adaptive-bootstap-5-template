@@ -1,0 +1,428 @@
+<!-- Адаптивная - это такая разметка, которую можно настроить под различные размеры экранов. 
+Осуществляется создание адаптивной разметки с помощью медиа запросов, которые появились в спецификации CSS3 и 
+в настоящий момент поддерживаются всеми основными браузерами. -->
+
+<!-- Синтаксис медиа запросов
+Для создания медиа запросов используется следующий синтаксис:
+
+@media условие {
+/* стили (они будут выполняться, если устройство соответствует указанному условию)
+}
+
+Основные типы устройств:
+
+all - все устройства (по умолчанию).
+print - принтеры и режим предварительного просмотра страницы перед печатью.
+screen - устройства с дисплеями.
+Логические операторы:
+
+and - требует обязательного выполнения всех указанных условий.
+Например:
+@media screen and (min-width: 1200px) and (orientation: landscape) { /* Стили CSS ... */ }
+Стили CSS в вышеприведённом примере выполняться только в том случае, если страница будет выводиться на устройство с экраном, иметь область просмотра более 1200 пикселей в ширину, а также находиться в альбомном режиме.
+, (запятая) - требует обязательного выполнения хотя бы одного из указанных условий в медиа запросе.
+@media (min-width: 544px), (orientation: landscape) { /* Стили CSS ... */ }
+Стили CSS в этом примере будут применяться к странице в двух случаях. Т.е. тогда, когда устройство будет иметь viewport не менее 544 пикселей (включительно) или ориентацию landscape.
+not - предназначен для отрицания указанного условия. Имеет по отношению к оператору and меньший приоритет, т.е. оператор not всегда выполняется после and.
+@media not screen and (orientation: portrait), (min-width: 992px) { /* Стили CSS ... */ }
+Стили CSS, находящиеся в этом правиле, будут применены к странице только в том случае, если устройство не является screen и не будет иметь портретную ориентацию. А также они (стили CSS) будут применены к элементам документа ещё тогда, когда устройство (браузер) будет иметь ширину рабочей области не менее 992 пикселя (включительно).
+Т.е. запрос в вышеприведённом примере будет обрабатываться так:
+@media not (screen and (orientation: portrait)), (min-width: 992px) { /* Стили CSS ... */ }
+
+
+Медиа функции
+Для составления условия в @media можно использовать следующие фукнции:
+
+width - указывает требования к ширине области просмотра устройства (браузера).
+/* применить стили CSS только для устройств с шириной области просмотра, равной 320px */
+@media (width: 320px) { /* Стили CSS ... */ }
+min-width - задаёт минимальную ширину области viewport в px, em или других единицах.
+/* для устройств (браузеров), которые предоставляют для страницы минимальную ширину области просмотра, равную 544 пикселя */
+@media (min-width: 544px) { /* Стили CSS ... */ }
+max-width - указывает на то, какой должна быть максимальная рабочая область устройства (браузера).
+/* стили, которые будут применены к элементам страницы с рабочей областью не больше 1199 пикселей */
+@media (max-width: 1199px) { /* Стили CSS ... */ }
+height, min-height и max-height - задают требования аналогично вышеприведённым функциям, но в отношении высоты viewport.
+/* стили, которые будут применены к элементам страницы в том случае, если viewport браузера будет больше 720px в высоту */
+@media (min-height: 720px) { /* Стили CSS ... */ }
+orientation - функция, которая проверяет то, в каком режиме (portrait или landscape) отображается страница.
+Пример, в котором в зависимости от ориентации экрана, отображается одна или другая картинка:
+/* landscape (альбомный) - это режим, в котором наоборот ширина viewport больше её высоты */
+@media (orientation: landscape) { 
+  #background-image { background: url(image1.png) no-repeat; }
+}
+
+/* portrait (портретный) - это режим, в котором высота viewport больше ширины */
+@media (orientation: portrait) { 
+  #background-image { background: url(image2.png) no-repeat; }
+}   -->
+
+<!-- -------Bootstrap-------- -->
+<!-- -------Bootstrap-------- -->
+<!-- В своей основе Bootstrap использует подход Mobile First. Это означает, что вначале указывается код для 
+мобильных устройств, а потом код для десктопа. Возникает вопрос: «А причём тут Mobile First, если необходимо 
+только использовать нужные классы?». Ответ на данный вопрос кроется в том, с какими разрешениями экрана 
+работает Bootstrap. Таких разрешений в последней версии пять:
+
+Extra small. Ширина viewport меньше 576px. Внутри Bootstrap такое разрешение никак не маркируется. Данный тип является значением по умолчанию. Ширина .container: 100%.
+
+Small. Ширина viewport больше или равна 576px. Внутри Bootstrap такое разрешение маркируется как -sm-. Ширина .container: 540px.
+
+Medium. Ширина viewport больше или равна 768px. Внутри Bootstrap такое разрешение маркируется как -md-. Ширина .container: 720px.
+
+Large. Ширина viewport больше или равна 992px. Внутри Bootstrap такое разрешение маркируется как -lg-. Ширина .container: 960px.
+
+Extra large. Ширина viewport больше или равна 1200px. Внутри Bootstrap такое разрешение маркируется как -xl-. Ширина .container: 1140px.
+
+Префикс Ширина viewport Ширина container
+-sm-    >=576px 540px
+-md-    >=768px 720px
+-lg-    >=992px 960px
+-xl-    >=1200px    1140px
+Эти префиксы, которые есть у разрешений, используются внутри сеток и утилит. 
+ -->
+
+
+<!-- адаптивный макет -->
+
+<!-- Если кратко, адаптивный макет – это такой макет, вид которого может изменяться в зависимости от того, 
+какую ширину viewport имеет браузер. Это означает, что при одних значениях ширины viewport адаптивный 
+макет может выглядеть одним образом, а при иных – совершенно по-другому. -->
+
+
+<!-- Адаптивный макет сайта
+Адаптивный макет сайта - это макет, который может «приспосабливаться» под различные устройства 
+(ширину рабочей области окна браузера). Т.е. на одних устройствах он может иметь одну структуру, а на других - другую. -->
+
+
+<!-- Начинают верстать сайт, который будет "строится" на Bootstrap, с создания сетки. После создания сетки 
+переходят к наполнению её контентом и компонентами Bootstrap.
+
+Все компоненты Bootstrap являются гибкими, а не которые из них ещё и адаптивными как, например, Navbar. 
+Данный компонент (Navbar) может изменять своё представление, т.е. находится в мобильном или десктопном 
+представлении в зависимости от того какую в данный момент viewport ширину имеет браузер. -->
+
+<!-- --------------------------------------------------------------------------------------------------- -->
+
+<!-- Сетка Bootstrap 4 – это основная часть фреймворка. Она предназначена для создания адаптивных шаблонов.
+
+Сетка Bootstrap 4 основывается на CSS Flexbox и медиа-запросах (CSS media queries).  -->
+
+<!-- Сетка состоит и строк и колонок, что позволяет на позиционировать элементы на странице как угодно.
+Rows (ряды) - это один уровень блоков. Это означает, что когда мы создаем новый ряд (row) он занимает 
+всю ширину элемента внутри которого он находится.
+Горизонтальное выравнивание осуществляется с помощью колонок (Columns). Дочерними элементами ряда может 
+являться только колонка. Размещение контента в row без колонки - может привести к нарушению макета -->
+
+<!-- Очень маленький - Extra small (xs)
+Маленький - Small (sm)
+Средний - Medium (md)
+Большой - Large (lg)
+Очень большой - Extra large (xl)
+Огромный - Extra extra large (xxl) -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <!-- viewport - область просмотра -->
+        <!-- Viewport - это видимая пользователю область веб-страницы, то, что может увидеть 
+        пользователь, не прибегая к прокрутке. -->
+        <!-- width – ширина области просмотра. 
+        Значением атрибута является целое неотрицательное число от 200 до 10000 пикселей или константа 
+        device-width, которая задаёт ширину страницы в соответствии с размером экрана. -->
+        <!-- initial-scale – начальный масштаб страницы.
+        Значением атрибута является вещественное число от 0.1 до 1.0. Значение 1.0 определяет 
+        масштаб 1:1, т.е. «не масштабировать». -->
+
+
+        <!-- minimal-scale - задаёт минимальный масштаб;
+        maximal-scale - устанавливает максимальный масштаб;
+        user-scalable - указывает, может ли пользователь управлять масштабом или нет. -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <!-- Иконки Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+        <link href="css/bootstrap.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+<!--             px
+            p - for classes that set padding
+            x - for classes that set both *-left and *-right
+            padding устанавливает внутренние отступы/поля со всех сторон элемента
+
+            m - for classes that set margin
+            y - for classes that set both *-top and *-bottom 
+            margin  Устанавливает величину отступа от левого края элемента -->
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shop in style</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <!-- Большой - Large (lg) -->
+            <div class="container px-4 px-lg-5 mt-5">
+                <!-- отзывчивые классы .row-cols-*, чтобы быстро установить количество столбцов: -->
+                <!-- row-cols-2  - 2 столбца -->
+                <!-- row-cols-md-3  - 3  столб. Средний - Medium (md)  -->
+                <!-- row-cols-xl-4    - 4  Extra large (xl) -->
+
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+<!--                     mb-5 
+                    m - for classes that set margin
+                    p - for classes that set padding
+                    b - for classes that set margin-bottom or padding-bottom
+                    5 - (by default) for classes that set the margin or padding to $spacer * 3 -->
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <!-- Product price-->
+                                    $40.00 - $80.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Special Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    $18.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Sale Item</h5>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$50.00</span>
+                                    $25.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Popular Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    $40.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Sale Item</h5>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$50.00</span>
+                                    $25.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <!-- Product price-->
+                                    $120.00 - $280.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Special Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    $18.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Popular Item</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    $40.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script> -->
+        !-- <script src="js/bootstrap.bundle.min.js"></script> -->
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
